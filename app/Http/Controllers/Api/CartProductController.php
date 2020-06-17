@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Cart;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CartResource;
-use App\Models\Status;
+use App\Models\CartProduct;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CartProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'data' => new CartResource(Cart::firstOrCreate(['status_id' => Status::first()->id]))
-        ]);
+        //
     }
 
     /**
@@ -30,16 +26,25 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = CartProduct::create($request->all());
+        if($data){
+            return response()->json([
+                'data' => 'Guardado'
+            ]);
+        } else {
+            return response()->json([
+                'data' => 'No se pudo crear'
+            ], 402);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\CartProduct  $cartProduct
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show(CartProduct $cartProduct)
     {
         //
     }
@@ -48,10 +53,10 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\CartProduct  $cartProduct
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, CartProduct $cartProduct)
     {
         //
     }
@@ -59,10 +64,10 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cart  $cart
+     * @param  \App\Models\CartProduct  $cartProduct
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(CartProduct $cartProduct)
     {
         //
     }

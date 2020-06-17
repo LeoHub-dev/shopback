@@ -15,7 +15,7 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('status')->nullable()->references('id')->on('statuses')->onDelete('set null');
+            $table->foreignId('status_id')->nullable()->references('id')->on('statuses')->onDelete('set null');
             $table->timestamps();
         });
     }
