@@ -26,7 +26,7 @@ class CartProductController extends Controller
      */
     public function store(Request $request)
     {
-        $data = CartProduct::create($request->all());
+        $data = CartProduct::updateOrCreate(['product_id' => $request->input('product_id'), 'cart_id' => $request->input('cart_id')], $request->only('quantity'));
         if($data){
             return response()->json([
                 'data' => 'Guardado'
@@ -67,8 +67,12 @@ class CartProductController extends Controller
      * @param  \App\Models\CartProduct  $cartProduct
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CartProduct $cartProduct)
+    public function destroy(Request $request)
     {
-        //
+        error_log(json_encode($request->all()));
+        CartProduct::where([
+            'product_id' => $request->input('product_id'),
+            'cart_id' => $request->input('cart_id')
+        ])->first()->delete();
     }
 }

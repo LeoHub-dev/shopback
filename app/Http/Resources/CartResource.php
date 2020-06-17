@@ -17,7 +17,10 @@ class CartResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => new StatusResource($this->status),
-            'products' => ProductResource::collection($this->products)
+            'products' => $this->whenPivotLoaded('cart_products', function () {
+                return $this->quantity;
+             })
+            //'products' => ProductResource::collection($this->products)
         ];
     }
 }

@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'sku' => $this->sku,
             'description' => $this->description,
+            'quantity' => $this->quantity
         ];
     }
 }

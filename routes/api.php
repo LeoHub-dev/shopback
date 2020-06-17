@@ -18,5 +18,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
 
     Route::apiResource('products', 'ProductController');
     Route::apiResource('carts', 'CartController');
+    Route::post('cartproduct', 'CartProductController@store');
+    Route::post('cartproduct-delete', 'CartProductController@destroy');
 
 });
